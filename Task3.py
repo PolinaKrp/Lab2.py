@@ -1,8 +1,8 @@
 import os
-import random
+import random  
 import shutil
 import csv
-from typing import Optional
+from typing import Optional  
 
 from Task2 import create_dir
 
@@ -18,7 +18,7 @@ def create_randomname_file(annotation_name: str, dir_copy: str) -> None:
     and renames files changing filename to a random number from 0 to 10000
     and create csv annotation with 2 parameters: new name of file and class of file"""
     file_number = list(range(10001))
-    random.shuffle(file_number)
+    random.shuffle(file_number) 
     counter = 1
     create_dir(dir_copy)
     for dataset_class in os.listdir("dataset"):
@@ -26,8 +26,8 @@ def create_randomname_file(annotation_name: str, dir_copy: str) -> None:
             shutil.copy(os.path.join(os.path.join("dataset", dataset_class), file_name),
                         os.path.join(dir_copy, f"{file_number[counter]}.jpg"))
 
-            with open(os.path.join(dir_copy, annotation_name), mode="a", encoding="UTF-16", newline='') as file:
-                file_writer = csv.writer(file, delimiter=",")
+            with open(os.path.join(dir_copy, annotation_name), mode="a", encoding="UTF-16", newline='') as file:  #UTF-16 кодировка символов юникод 2 или 4 байтами
+                file_writer = csv.writer(file, delimiter=",")  #Возвращает объект writer, конвертирующий пользовательские данные в csv файл
                 file_writer.writerow([f"{file_number[counter]}.jpg", dataset_class])
             counter += 1
 
